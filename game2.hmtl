@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="guessWorld.css">
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-</head>
-<body> 
-
-<div class="GuessTheWorld">
+<div class="hangman">
   <div class="guess"></div>
   <form class="guessForm">
   <input type="text" class="guessLetter" maxlength="1"  placeholder="Enter a letter . . . &#x23ce;"/> <button type="submit" class="guessButton">Guess</button>
   </form>  
-
+  <p>Hint: words are web related. <br/><a href="http://codepen.io/natewiley">Follow Me on Codepen</a></p>
   <div class="wrong">
     <div class="wrongLetters"></div>
   </div>
@@ -21,8 +13,4 @@
     <button class="restart button">Play Again?</button>
     
   </div>
-   
 </div>
-     <sript src="guessWorld.js"></sript>
-    </body>
-</html>

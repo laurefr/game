@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Londrina+Solid|Nunito:400,300);
-
 $blue: #53BDFF;
 $green: #2EB933;
 $drk-blue: darken($blue, 10%);
@@ -10,29 +9,29 @@ html, body {
   height: 100%;
 }
 body {
-  background:  #727272;
+  background: rgb(50,50,50);
 
 }
 
 a {
-  color: #53BDFF;
+  color: $blue;
   text-decoration: none;
   font-size: 14px;
   &:hover {
-    color: 2F729F;
+    color: lighten($blue, 10%);
   }
 }
-.GuessTheWorld {
+.hangman {
   font-family: "Londrina Solid", cursive;
   margin: 0 auto;
   text-align: center;
-  padding: 50px;
+  padding: 10px;
  }
 
 h1 {
   font-size: 50px;
   margin-bottom: 20px;
-  color: #53BDFF;
+  color: $blue;
   font-weight: 300;
 }
 
@@ -51,14 +50,14 @@ p {
 .letter {
   display: inline-block;
   color: transparent;
-  border-bottom: 5px solid #53BDFF;
+  border-bottom: 5px solid $blue;
   margin: 0 10px;
   font-size: 50px;
   padding: 10px;
   transition: .5s;
   text-transform: uppercase;
   
-
+  
 }
 .word {
   display: block;
@@ -66,15 +65,13 @@ p {
 }
 
 .correct {
-  color: #53BDFF;
-  text-shadow: 1px 2px 0 #20a9ff;
+  color: $blue;
+  text-shadow: 1px 2px 0 $drk-blue;
   animation: letteranim .3s ease;
 }
 
-
 .guessForm {
   margin: 20px auto 0;
-}
   input, .guessButton {
     font-family: "Londrina Solid", cursive;
   }
@@ -93,13 +90,13 @@ p {
     font-size: 30px;
     padding: 10px 20px;
     cursor: pointer;
-    background: #53BDFF;
+    background: $blue;
     color: white;
     transition: .3s;
     margin: 10px 0;
-    text-shadow: 1px 2px 0 #2A5E7F;
+    text-shadow: 1px 2px 0 $drk-blue;
     &:hover {
-      background: #0F2330;
+      background: $drk-blue;
     }
   }
 }
@@ -170,25 +167,13 @@ p {
     font-size: 30px;
     padding: 10px 20px;
     cursor: pointer;
-    background: lighten(green, 5%);
+    background: lighten($green, 5%);
     color: white;
     transition: .3s;
-    text-shadow: 1px 2px 0 #2EB933;
+    text-shadow: 1px 2px 0 $green;
     font-family: "Londrina Solid", cursive;
     &:hover {
-      background: lighten(#2EB933, 20%);
+      background: lighten($green, 20%);
       
     }
 }
-ul, menu, dir {
-    display:inline-block;
-    list-style-type: disc;
-     font-size: 1.6em;
-     padding: 0 10px;
-    list-style: none;
-     position: relative;
-     margin: 0;
-
-}
-
- 
