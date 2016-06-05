@@ -16,30 +16,21 @@
       this.rightGuesses = [],
       this.guessForm = $(".guessForm"),
       this.guessLetterInput = $(".guessLetter"),
-      this.goodSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/goodbell.mp3"),
-      this.badSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/bad.mp3"),
-      this.winSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/win.mp3"),
-      this.loseSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/lose.mp3"),
+    
       this.setup();
     },
 
 
     setup: function(){
       this.binding();
-      this.sounds();
+
       this.showGuess(this.wrongGuesses);
       this.showWrong();
 
     },
 
     
-    sounds: function(){  
-      this.badSound.volume = .4;
-      this.goodSound.volume = .4;
-      this.winSound.volume = .8;
-      this.loseSound.volume = .4;
-      
-    },
+    
     
     
     binding: function(){
@@ -48,17 +39,7 @@
     },
 
 
-    playSound: function(sound){
-      this.stopSound(sound);
-      this[sound].play();
-    },
-
-
-    stopSound: function(sound){
-      this[sound].pause();
-      this[sound].currentTime = 0;
-
-    },
+ 
 
 
     theRestart: function(e){
@@ -74,14 +55,14 @@
       var guess = this.guessLetterInput.val();
       if(guess.match(/[a-zA-Z]/) && guess.length == 1){
         if($.inArray(guess, this.wrongGuesses) > -1 || $.inArray(guess, this.rightGuesses) > -1){
-          this.playSound("badSound");
+         
           this.guessLetterInput.val("").focus();
         }
         else if(guess) {
           var foundLetters = this.checkGuess(guess);
           if(foundLetters.length > 0){
             this.setLetters(foundLetters);
-            this.playSound("goodSound");
+           
             this.guessLetterInput.val("").focus();
           } else {
             this.wrongGuesses.push(guess);
@@ -89,7 +70,7 @@
               this.lose();
             } else {
               this.showWrong(this.wrongGuesses);
-              this.playSound("badSound");
+             
             }
             this.guessLetterInput.val("").focus();
           }
@@ -229,7 +210,7 @@
       // this is messy
       this.msgText.html("You solved the word in <span class='highlight'>" + rating.guesses + "</span> Guesses!<br>Score: <span class='highlight'>" + rating.rating + "%</span>");
       this.showMsg();
-      this.playSound("winSound");
+      
 
     },
 
@@ -238,7 +219,6 @@
       this.msgTitle.html("You Lost.. The word was <span class='highlight'>"+ this.wrd.word +"</span>");
       this.msgText.html("Don't worry, you'll get the next one!");
       this.showMsg();
-      this.playSound("loseSound");
     }
   
   };
@@ -249,3 +229,7 @@
   
 })(jQuery, window);
 
+
+
+  
+  

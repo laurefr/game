@@ -2,26 +2,27 @@
 
     (function ($, window, undefined){
        
-        GuessTheWorld = {
+        GuessTheWord = {
         init: function(words){
         this.words = words,
-        this.gtw = $(".GuessTheWorld"),
+        this.gtw = $(".GuessTheWord"),
         this.msg = $(".message");
         this.msgTitle = $(".title"),
         this.msgText = $(".text"),
          this.restart = $(".restart");
-        this.wrd= this.randomWorld();
-        this.correct=0,
+        this.wrd= this.randomWord();
+        this.correct = 0,
         this.guess= $(".guess"),
         this.wrong= $(".wrong"),
         this.wrongGuesses=[],
         this.rightGuesses=[],
-        this.guessForm= $("guessForm"),
-        this.guessLetterInpput = $("guessLetter"),
+        this.guessForm= $(".guessForm"),
+        this.guessLetterInpput = $(".guessLetter"),
+        this.setup();
     
             },
            
-            setup:function(){
+      setup: function(){
       this.binding();
       this.showGuess(this.wrongGuesses);
       this.showWrong();
@@ -40,7 +41,7 @@
       
         theRestart : function(r){
             r.preventDefault();
-            this.reset(),
+            this.reset();
         },
        // var space, // number of space in word'-'
 
@@ -50,7 +51,7 @@
   theGuess: function(r)
     {
         r.preventDefault();
-        var guess= this.guessLetterInput.val();
+        var guess = this.guessLetterInput.val();
         if (guess.match (/[a-zA-Z]/) && guess.length ==1){
             if($.inArray(guess, this.wrongGuesses)>-1 || $.inArray(guess, this.rightGuesses)>-1)
                 
@@ -67,9 +68,9 @@
                 }
                 //setting the max number of guesses
                 else{
-                    this.wrongGuesses.push(guess),
-                    if(this.wrongGuesses.length==7){
-                        this lose();
+                    this.wrongGuesses.push(guess);
+                    if(this.wrongGuesses.length == 7){
+                        this.lose();
                     }
                     else{
                         this.showWrong(this.wrongGuesses);
@@ -102,38 +103,37 @@
             }*/
 
             //random word
-       randomWorld: function(){
+       randomWord: function(){
             return this._wordData(this.words[Math.floor(Math.random()*this.words.length)]);
        // chosenCategory = categories[Math.floor(Math.random()*categories.length)];
         // word = chosenCategory[Math.floor(Math.random()*chosenCategory.length)];
 
         },
 
-        showGuess: function(){
-        var frag = "<ul class='word'>";
-        $.each (this.wrd.letters, function (key,val){
-            frag += "< li data-pos ='" + key + "' class = "' class= 'letter'>*</li>";
-        });
-        frag += "</ul>"
-        this.guess.html(frag);
+     showGuess: function(){
+      var frag = "<ul class='word'>";
+      $.each(this.wrd.letters, function(key, val){
+        frag += "<li data-pos='" +  key  + "' class='letter'>*</li>";
+      });
+      frag += "</ul>";
+      this.guess.html(frag);
     },
         
-        showWrong: function (wrongGuesses){
-            if (wrongGuesses){
-                var fragmement="<ul class = ' wrongLetters'>";
-                frag += "<p> Wrong Letters:</p>";
-                $.each(wrongGuesses,function(key, val){
-                    frag +="<li>" + val + "</li>"
-                });
-                frag += "</ul>"
-            }
-            else{
-                frag= "";
+      showWrong: function(wrongGuesses){
+      if(wrongGuesses){
+        var frag = "<ul class='wrongLetters'>";
+        frag += "<p>Wrong Letters: </p>";
+        $.each(wrongGuesses, function(key, val){
+          frag += "<li>" + val + "</li>";
+        });
+        frag += "</ul>";
+      }
+      else {
+        frag = "";
+      }
 
-            }
-
-            this.wrong.html(fragement)
-        },
+      this.wrong.html(frag);
+    },
 
         //checking the user guessses
 
@@ -150,22 +150,20 @@
 
         },
 
-       setLetters: function (letters)
-        {
-            var _ = this;
-            _.correct = _.correct += letters.length;
-            $.each (letters, function (key,val){
-                var letter= $("li[data-pos=" + val.pos +"]" );
-                letter.html(val.letter);
-                letter.addClass("correct");
+        setLetters: function(letters){
+      var _ = this;
+      _.correct = _.correct += letters.length;
+      $.each(letters, function(key, val){
+        var letter = $("li[data-pos=" +val.pos+ "]");
+        letter.html(val.letter);
+        letter.addClass("correct");
 
-                if (_.correct == _.wrd.letters.length){
-                    _.win();
-                }
+        if(_.correct  == _.wrd.letters.length){
+          _.win();
+        }
+      });
+    },
 
-            });
-        },
-        
         _wordData: function(word){
             return{
                 letters: this._letters(word),
@@ -204,9 +202,9 @@
     // find the position of the correct letter of the random world
         _letters:function(word){
             var letters =[];
-            for (var i = 0; i<word.length; i++){
+            for (var i=0; i<word.length; i++){
                 letters.push({
-                    letter:word[i];
+                    letter:word[i],
                     pos:i
                 });
             }
@@ -217,10 +215,9 @@
             // counting the number of guesses right or wrong
         count:function(){
             var right = this.rightGuesses.length,
-           wrong = this.wrongGuesses.length ||0;
+           wrong = this.wrongGuesses.length ||0,
             count ={
-
-                count:Math.floor((right/(wrong + right))*100),
+count:Math.floor((right/(wrong + right))*100),
                 guesses: (right + wrong)
             };
             return count;
@@ -251,12 +248,12 @@
 
 }
              var wordList = [
-          "chrome", "firefox", "codepen", "javascript", "jquery", "twitter", "github", "wordpress", "opera", "sass", "layout", "standards", "semantic", "designer", "developer", "module", "component", "website", "creative", "banner", "browser", "screen", "mobile", "footer", "header", "typography", "responsive", "programmer", "css", "border", "github", "grunt", "pixel", "document", "object", "ruby", "modernizr", "bootstrap", "python", "php", "pattern", "ajax", "node", "element", "android", "application", "adobe", "apple", "google", "microsoft", "bookmark", "internet", "icon", "svg", "background", "property", "syntax", "flash", "html", "font", "blog", "network", "server", "content", "database", "socket", "function", "variable", "link", "apache", "query", "proxy", "backbone", "angular", "email", "underscore", "cloud"
-    "archery","badminton","basketball","karate","boxing,kayak","cycling","diving","equestrian","fencing","fieldhockey","golf","gymnastics","handball","judo","rowing","rugby","sailing","shooting","football","swimming","taekwondo","tennis","triathlon","volleyball","weightlifting","wrestling","athleticism","basketball","baseball"
+          "chrome", "firefox", "codepen", "javascript", "jquery", "twitter", "github", "wordpress", "opera", "sass", "layout", "standards", "semantic", "designer", "developer", "module", "component", "website", "creative", "banner", "browser", "screen", "mobile", "footer", "header", "typography", "responsive", "programmer", "css", "border", "github", "grunt", "pixel", "document", "object", "ruby", "modernizr", "bootstrap", "python", "php", "pattern", "ajax", "node", "element", "android", "application", "adobe", "apple", "google", "microsoft", "bookmark", "internet", "icon", "svg", "background", "property", "syntax", "flash", "html", "font", "blog", "network", "server", "content", "database", "socket", "function", "variable", "link", "apache", "query", "proxy", "backbone", "angular", "email", "underscore", "cloud",
+    "archery","badminton","basketball","karate","boxing,kayak","cycling","diving","equestrian","fencing","fieldhockey","golf","gymnastics","handball","judo","rowing","rugby","sailing","shooting","football","swimming","taekwondo","tennis","triathlon","volleyball","weightlifting","wrestling","athleticism","basketball","baseball",
 
       "The Godfather","The-Dark-Knight","gladiator","alien", "saw", "jaws","psycho", "le-voyage-dans-la- lune","independence-day ","titanic","batman","spiderman","hulk","captain-america","superman","carol","rocky","jurassic-park","ghostbusters","top-gun","forrest-gump" ,"scarface","goodfellas","braveheart","big","beetlejuice" ];
      
-GuessTheWorld.init(wordList);
+GuessTheWord.init(wordList);
 })(jQuery, window);
 
 
