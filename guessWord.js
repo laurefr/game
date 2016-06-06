@@ -1,5 +1,4 @@
 
-
     (function ($, window, undefined){
        
         GuessTheWord = {
@@ -9,15 +8,15 @@
         this.msg = $(".message");
         this.msgTitle = $(".title"),
         this.msgText = $(".text"),
-         this.restart = $(".restart");
-        this.wrd= this.randomWord();
+        this.restart = $(".restart"),
+        this.wrd= this.randomWord(),
         this.correct = 0,
         this.guess= $(".guess"),
         this.wrong= $(".wrong"),
         this.wrongGuesses=[],
         this.rightGuesses=[],
         this.guessForm= $(".guessForm"),
-        this.guessLetterInpput = $(".guessLetter"),
+        this.guessLetterInput = $(".guessLetter"),
         this.setup();
     
             },
@@ -32,28 +31,24 @@
       /*  var categories,
         var chosenCategory,*/
 
-            binding:function()
+            binding: function()
         {
-            this.guessForm.on("submt", $.proxy(this.theGuess,this));
-            this.restart.on("click", $.proxy(this.theRestart,this));
+            this.guessForm.on("submit", $.proxy(this.theGuess,this));
+            this.restart.on("click", $.proxy(this.theRestart, this));
         },
 
       
-        theRestart : function(r){
-            r.preventDefault();
+        theRestart : function(e){
+            e.preventDefault();
             this.reset();
         },
-       // var space, // number of space in word'-'
 
-
-
-
-  theGuess: function(r)
+  theGuess: function(e)
     {
-        r.preventDefault();
+        e.preventDefault();
         var guess = this.guessLetterInput.val();
-        if (guess.match (/[a-zA-Z]/) && guess.length ==1){
-            if($.inArray(guess, this.wrongGuesses)>-1 || $.inArray(guess, this.rightGuesses)>-1)
+        if (guess.match (/[a-zA-Z]/) && guess.length == 1){
+            if($.inArray(guess, this.wrongGuesses) > -1 || $.inArray(guess, this.rightGuesses) > -1){
                 
                 this.guessLetterInput.val("").focus();
         }
@@ -61,7 +56,7 @@
         else if (guess)
             {
                 var foundLetters = this.checkGuess(guess);
-                if (foundLetters.length >0){
+                if (foundLetters.length > 0){
                     this.setLetters(foundLetters);
                     this.guessLetterInput.val("").focus();
 
@@ -78,8 +73,9 @@
                     this.guessLetterInput.val("").focus();
                 }
             }
+            }
             else{
-                this.guessLetterInput.val("").focus
+                this.guessLetterInput.val("").focus();
             }
         },
 
@@ -137,16 +133,16 @@
 
         //checking the user guessses
 
-        checkGuess: function (guessedLetter){
-            var _= this;
-            var found = [];
-            $.each(this.wrd.letters, function (key,val){
-                if (guessedLetter == val.letter.toLowerCase()){
-                    found.push(val);
-                _.rigthGuessses.push(val.letter);
-            }
-                    });
-            return found;
+        checkGuess: function(guessedLetter){
+      var _ = this;
+      var found = [];
+      $.each(this.wrd.letters, function(key, val){
+        if(guessedLetter == val.letter.toLowerCase()){
+          found.push(val);
+          _.rightGuesses.push(val.letter);
+        }
+      });
+      return found;
 
         },
 
@@ -204,8 +200,8 @@
             var letters =[];
             for (var i=0; i<word.length; i++){
                 letters.push({
-                    letter:word[i],
-                    pos:i
+                    letter: word[i],
+                    pos: i
                 });
             }
             return letters;
@@ -213,32 +209,32 @@
         
             
             // counting the number of guesses right or wrong
-        count:function(){
+       rating: function(){
             var right = this.rightGuesses.length,
            wrong = this.wrongGuesses.length ||0,
-            count ={
-count:Math.floor((right/(wrong + right))*100),
+           rating = {
+rating: Math.floor((right/(wrong + right))*100),
                 guesses: (right + wrong)
             };
-            return count;
+            return rating;
 
         },
 
 
-    win:function (){
-        var count= this.count();
+    win: function (){
+        var rating = this.rating();
         this.msgTitle.html ("Great, You Won!");
         //copy
-        this.msgText.html("You solved the world in <span class ='highlight'>"+ count.guesses + "</span Guesses!<br> Score:<span class 'highlight'>"+ count.count + "%</span>");
+        this.msgText.html("You solved the world in <span class ='highlight'>"+ rating.guesses + "</span Guesses!<br> Score:<span class 'highlight'>"+ rating.rating + "%</span>");
 
-        this.showMsg()
+        this.showMsg();
     },
     
 
     // creating a function if user lose, showing the right word 
      lose:function(){
 
-        this.msgTitle.html("You Lost... the word was <span class>'highlight'>"+ this.wrd.word + "</span>");
+        this.msgTitle.html("You Lost... the word was <span class ='highlight'>"+ this.wrd.word + "</span>");
          this.msgText.html ("Don't worry, you can try again!")
          this.showMsg();
 
