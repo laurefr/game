@@ -1,32 +1,4 @@
-
-
-var eventWebWords = document.getElementById("webButton");
-eventWebWords.addEventListener('click', ChooseWebWords, false);
-var eventSportWords = document.getElementById("sportButton");
-eventSportWords.addEventListener('click', ChooseSportWords, false);
-var eventMovieWords = document.getElementById("movieButton");
-eventMovieWords.addEventListener('click', ChooseMovieWords, false);
-
-    
-function whichButton(buttonElement){
-
-  var buttonClickedId = buttonElement.id;
-  if( buttonClickedId === 'movieButton' ){
-     $("body").css("color", "#8e44ad")
-  }
-  else if( buttonClickedId === 'webButton' ){
-      $("body").css("color", "#de1414")
-  }
-      else if( buttonClickedId === 'sportButton' ){
-      $("body").css("color", "#e67e22")
-  }
-  // ...
-  else{
-     // don't know which button was clicked
-  }
-
-}
-    (function ($, window, undefined){
+ (function ($, window, undefined){
        
         GuessTheWord = {
         init: function(words){
@@ -105,11 +77,32 @@ function whichButton(buttonElement){
                 this.guessLetterInput.val("").focus();
             }
         },
-            
+
+       
+
+
+            // select Category
+
+            /*randomWorld = function (){
+                if (chosenCategory===categories[0]){
+                    categoryName.innerHTML = "The chosen Category is web related";
+                }
+                else if(chosenCategory=== categories[1]){
+                    categoryName.innerHTML = " The chosen Category is sport related"
+                }
+
+                else if (chosenCategory===categories[2]){
+                    categoryName.innerHTML= "The chosen Category is film related"
+                }
+
+            }*/
+
             //random word
        randomWord: function(){
             return this._wordData(this.words[Math.floor(Math.random()*this.words.length)]);
-      
+       // chosenCategory = categories[Math.floor(Math.random()*categories.length)];
+        // word = chosenCategory[Math.floor(Math.random()*chosenCategory.length)];
+
         },
 
      showGuess: function(){
