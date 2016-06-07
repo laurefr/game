@@ -14,6 +14,7 @@ body {
 
 }
 
+
 a {
   color: #53BDFF;
   text-decoration: none;
@@ -198,3 +199,22 @@ background: #53BDFF;
       
 }
  
+center {
+    display: block;
+    text-align: -webkit-center;
+
+}
+.btn {
+    display: inline-block;
+    padding: 6px 50px;
+    margin-bottom: 20px;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+a:-webkit-any-link {
+    color: none;
+    text-decoration: none;
+    cursor: auto;
+     color: #FF00FF;
+}
